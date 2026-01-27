@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9J8434Z0MN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9J8434Z0MN');
+</script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Viewing - Links</title>
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/logo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(20px);
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 680px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Logo/Header */
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 40px;
+            display: block;
+            border-radius: 50%;
+            border: none;
+            object-fit: cover;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Featured Card */
+        .featured-card {
+            background: linear-gradient(135deg, #ff0080 0%, #ff8c00 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1.1);
+                box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                transform: scale(1.12);
+                box-shadow: 0 12px 48px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .featured-card:hover {
+            transform: scale(1.15) !important;
+            box-shadow: 0 16px 64px rgba(255, 255, 255, 0.6);
+        }
+
+        .featured-card .link-header {
+            padding: 28px;
+        }
+
+        .featured-card .link-title {
+            font-size: 26px;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .featured-card .link-icon {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            width: 56px;
+            height: 56px;
+        }
+
+        .featured-card .link-icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Link Cards */
+        .link-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .link-card:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .link-header {
+            display: flex;
+            align-items: center;
+            padding: 20px 24px;
+            cursor: pointer;
+            gap: 16px;
+        }
+
+        .link-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            flex-shrink: 0;
+        }
+
+        .link-icon img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .link-title {
+            flex: 1;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .expand-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Expandable Content */
+        .link-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .link-content.expanded {
+            max-height: 500px;
+        }
+
+        .link-list {
+            padding: 0 24px 20px;
+        }
+
+        .link-item {
+            display: block;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .link-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(4px);
+        }
+
+        /* Simple Link Card (no dropdown) */
+        .simple-link {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .simple-link .link-header:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Profile Image */
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Age Restriction Badge */
+        .age-badge {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Icons as SVG */
+        .icon-discord {
+            color: #5865F2;
+            font-size: 28px;
+        }
+
+        .icon-x {
+            color: #fff;
+            font-size: 28px;
+        }
+
+        .icon-reddit {
+            color: #FF4500;
+            font-size: 28px;
+        }
+
+        .icon-telegram {
+            color: #0088cc;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="images/logo.jpg" alt="Logo" class="logo">
+
+        <!-- Discords (18+) -->
+        <div class="link-card">
+            <div class="link-header" onclick="toggleExpand(this)">
+                <div class="link-icon">
+                    <span class="icon-discord">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963.021-.04.001-.088-.041-.104a13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="link-title">Discords <span class="age-badge">(18+)</span></div>
+                <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+            <div class="link-content">
+                <div class="link-list">
+                    <a href="https://discord.gg/Pvzn4g65m" class="link-item" target="_blank">Discord</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- X/Twitter -->
+        <div class="link-card">
+            <div class="link-header" onclick="toggleExpand(this)">
+                <div class="link-icon">
+                    <span class="icon-x">𝕏</span>
+                </div>
+                <div class="link-title">XXX</div>
+                <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+            <div class="link-content">
+                <div class="link-list">
+                    <a href="https://x.com/richyplot" class="link-item" target="_blank">@richyplot</a>
+                    <a href="https://x.com/jazlyynxo" class="link-item" target="_blank">@jazlyynxo</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Telegram -->
+        <div class="link-card">
+            <div class="link-header" onclick="toggleExpand(this)">
+                <div class="link-icon">
+                    <span class="icon-telegram">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="link-title">Telegram</div>
+                <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+            <div class="link-content">
+                <div class="link-list">
+                    <a href="https://t.me/galleryviewings" class="link-item" target="_blank">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleExpand(header) {
+            const card = header.closest('.link-card');
+            const content = card.querySelector('.link-content');
+            const icon = header.querySelector('.expand-icon');
+            
+            content.classList.toggle('expanded');
+            icon.classList.toggle('rotated');
+        }
+    </script>
+</body>
+</html>
